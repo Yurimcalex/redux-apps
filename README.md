@@ -1,0 +1,9 @@
+https://redux.js.org/  
+https://reactjs.org   
+https://redux-toolkit.js.org  
+https://react-redux.js.org  
+https://reselect.js.org  
+https://github.com/reduxjs/redux-templates/tree/master/packages/vite-template-redux  
+https://stackoverflow.com/questions/38558989/node-js-heap-out-of-memory  
+https://stackoverflow.com/questions/53230823/fatal-error-ineffective-mark-compacts-near-heap-limit-allocation-failed-javas  
+https://github.com/vitejs/vite/issues/15122  
