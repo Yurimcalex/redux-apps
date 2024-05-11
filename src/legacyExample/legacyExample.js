@@ -6,6 +6,8 @@ function counterReducer(state = { value: 0 }, action) {
 			return { value: state.value + 1 };
 		case 'counter/decremented':
 			return { value: state.value - 1 };
+		case 'counter/reseted':
+			return { value: 0 };
 		default:
 			return state;
 	}
@@ -18,3 +20,4 @@ store.subscribe(() => console.log(store.getState()));
 store.dispatch({ type: 'counter/incremented' });
 store.dispatch({ type: 'counter/incremented' });
 store.dispatch({ type: 'counter/decremented' });
+store.dispatch({ type: 'counter/reseted' });
