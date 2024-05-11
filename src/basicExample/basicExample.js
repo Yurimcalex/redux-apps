@@ -14,6 +14,9 @@ const counterSlice = createSlice({
 		},
 		incrementedBy2: state => {
 			state.value += 2;
+		},
+		incremenedIfPositive: state => {
+			if (state.value > 0) state.value += 1;
 		}
 	}
 });
@@ -21,7 +24,8 @@ const counterSlice = createSlice({
 export const { 
 	incremented,
 	decremented,
-	incrementedBy2 } = counterSlice.actions;
+	incrementedBy2,
+	incremenedIfPositive } = counterSlice.actions;
 
 const store = configureStore({
 	reducer: counterSlice.reducer
@@ -33,3 +37,4 @@ store.dispatch(incremented());
 store.dispatch(incremented());
 store.dispatch(decremented());
 store.dispatch(incrementedBy2());
+store.dispatch(incremenedIfPositive())
