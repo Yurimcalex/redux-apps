@@ -11,11 +11,17 @@ const counterSlice = createSlice({
 		},
 		decremented: state => {
 			state.value -= 1;
+		},
+		incrementedBy2: state => {
+			state.value += 2;
 		}
 	}
 });
 
-export const { incremented, decremented } = counterSlice.actions;
+export const { 
+	incremented,
+	decremented,
+	incrementedBy2 } = counterSlice.actions;
 
 const store = configureStore({
 	reducer: counterSlice.reducer
@@ -26,3 +32,4 @@ store.subscribe(() => console.log(store.getState()));
 store.dispatch(incremented());
 store.dispatch(incremented());
 store.dispatch(decremented());
+store.dispatch(incrementedBy2());
