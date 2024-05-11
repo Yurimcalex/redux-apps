@@ -3,7 +3,8 @@ import "./App.css";
 //import { Quotes } from "./features/quotes/Quotes";
 //import {} from "./basicExample/basicExample.js";
 //import {} from "./legacyExample/legacyExample.js";
-import {} from "./todoExample/legacyExample.js";
+//import {} from "./todoExample/legacyExample.js";
+import {} from "./todoExample/modernExample.js";
 
 
 const App = () => {
