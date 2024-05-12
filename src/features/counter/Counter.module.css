@@ -1,0 +1,9 @@
+.counter {
+	padding: 1em;
+	border: 1px solid lightgray;
+	text-align: center;
+}
+
+.counter > div > * {
+	margin-left: 0.5em;
+}
