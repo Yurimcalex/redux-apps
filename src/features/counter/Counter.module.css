@@ -7,3 +7,7 @@
 .counter > div > * {
 	margin-left: 0.5em;
 }
+
+.counter input {
+	width: 1em;
+}
