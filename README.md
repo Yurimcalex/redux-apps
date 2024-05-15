@@ -8,3 +8,4 @@ https://stackoverflow.com/questions/38558989/node-js-heap-out-of-memory
 https://stackoverflow.com/questions/53230823/fatal-error-ineffective-mark-compacts-near-heap-limit-allocation-failed-javas  
 https://github.com/vitejs/vite/issues/15122  
 https://github.com/reduxjs/redux-essentials-counter-example/blob/master/src/features/counter/Counter.js  
+https://github.com/reduxjs/redux-essentials-example-app  
