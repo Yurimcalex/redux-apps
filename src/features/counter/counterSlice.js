@@ -22,4 +22,10 @@ export const { increment, decrement, incrementByAmount } = counterSlice.actions;
 
 export const selectCount = (state) => state.counter.value;
 
+export const incrementAsync = (amount) => (dispatch) => {
+	setTimeout(() => {
+		dispatch(incrementByAmount(amount));
+	}, 3000);
+};
+
 export default counterSlice.reducer;
