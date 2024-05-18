@@ -3,8 +3,20 @@ import { nanoid } from '@reduxjs/toolkit';
 import { sub } from 'date-fns';
 
 const initialState = [
-	{ id: '1', title: 'First Post', content: 'Text text', date: sub(new Date(), { minutes: 10 }).toISOString() },
-	{ id: '2', title: 'Second Post', content: 'Another text', date: sub(new Date(), { minutes: 5 }).toISOString() }
+	{ 
+		id: '1',
+		title: 'First Post',
+		content: 'Text text',
+		date: sub(new Date(), { minutes: 10 }).toISOString(),
+		reactions: {thumbsUp: 1, hooray: 2, heart: 3, rocket: 4, eyes: 5}
+	},
+	{ 
+		id: '2',
+		title: 'Second Post',
+		content: 'Another text',
+		date: sub(new Date(), { minutes: 5 }).toISOString(),
+		reactions: {thumbsUp: 5, hooray: 4, heart: 3, rocket: 2, eyes: 1}
+	}
 ];
 
 const postsSlice = createSlice({
@@ -22,7 +34,8 @@ const postsSlice = createSlice({
 						date: new Date().toISOString(),
 						title,
 						content,
-						user: userId
+						user: userId,
+						reactions: {thumbsUp: 0, hooray: 0, heart: 0, rocket: 0, eyes: 0}
 					}
 				}
 			}
