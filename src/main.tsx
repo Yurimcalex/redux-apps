@@ -5,12 +5,8 @@ import App from "./App"
 import store from "./app/store"
 import "./index.css"
 import './primitiveui.css'
-import { worker } from './api/server'
 
-async function start() {
-  // Start our mock API server
-  await worker.start({ onUnhandledRequest: 'bypass' });
-
+function start() {
   const container = document.getElementById("root")
 
   if (container) {
