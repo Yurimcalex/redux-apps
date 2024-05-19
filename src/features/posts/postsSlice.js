@@ -57,7 +57,11 @@ const postsSlice = createSlice({
 			.addCase(fetchPosts.rejected, (state, action) => {
 				state.status = 'failed';
 				state.error = action.error.message;
-			})
+			});
+
+			builder.addCase(addNewPost.fulfilled, (state, action) => {
+				state.posts.push(action.payload)
+			});
 	}
 });
 
@@ -71,6 +75,20 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
   const response = await fetch('https://jsonplaceholder.typicode.com/posts');
   const data = await response.json();
   return data;
+});
+
+export const addNewPost = createAsyncThunk('posts/addNewPost', async initialPost => {
+	const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+		method: 'POST',
+		body: JSON.stringify({
+			...initialPost
+		}),
+		headers: {
+			'Content-type': 'application/json; charset=UTF-8'
+		}
+	});
+	const data = await response.json();
+	return data;
 });
 
 export default postsSlice.reducer;
