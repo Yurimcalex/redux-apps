@@ -9,7 +9,7 @@ export const EditPostForm = ({ match }) => {
 	const post = useSelector(state => selectPostById(state, postId));
 
 	const [title, setTitle] = useState(post.title);
-	const [content, setContent] = useState(post.content);
+	const [content, setContent] = useState(post.body);
 
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -19,7 +19,7 @@ export const EditPostForm = ({ match }) => {
 
 	const onSavePostClicked = () => {
 		if (title && content) {
-			dispatch(postUpdated({ id: postId, title,content }));
+			dispatch(postUpdated({ id: postId, title, body: content }));
 			history.push(`/posts/${postId}`);
 		}
 	};
