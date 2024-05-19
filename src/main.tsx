@@ -5,12 +5,15 @@ import App from "./App"
 import store from "./app/store"
 import "./index.css"
 import './primitiveui.css'
+import { fetchUsers } from './features/users/usersSlice.js';
 
 function start() {
   const container = document.getElementById("root")
 
   if (container) {
     const root = createRoot(container)
+
+    store.dispatch(fetchUsers());
 
     root.render(
       <React.StrictMode>
