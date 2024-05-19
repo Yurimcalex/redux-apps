@@ -1,23 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { nanoid } from '@reduxjs/toolkit';
+import { nanoid, createAsyncThunk } from '@reduxjs/toolkit';
 import { sub } from 'date-fns';
-
-// const initialState = [
-// 	{ 
-// 		id: '1',
-// 		title: 'First Post',
-// 		content: 'Text text',
-// 		date: sub(new Date(), { minutes: 10 }).toISOString(),
-// 		reactions: {thumbsUp: 1, hooray: 2, heart: 3, rocket: 4, eyes: 5}
-// 	},
-// 	{ 
-// 		id: '2',
-// 		title: 'Second Post',
-// 		content: 'Another text',
-// 		date: sub(new Date(), { minutes: 5 }).toISOString(),
-// 		reactions: {thumbsUp: 5, hooray: 4, heart: 3, rocket: 2, eyes: 1}
-// 	}
-// ];
 
 const initialState = {
 	posts: [],
@@ -69,5 +52,11 @@ export const { postAdded, postUpdated, reactionAdded } = postsSlice.actions;
 export const selectAllPosts = state => state.posts.posts;
 export const selectPostById = (state, postId) =>
 	state.posts.posts.find(post => post.id === postId);
+
+export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
+  const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+  const data = await response.json();
+  return data;
+});
 
 export default postsSlice.reducer;
