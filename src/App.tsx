@@ -13,6 +13,7 @@ import { SinglePostPage } from './features/posts/SinglePostPage.jsx';
 import { EditPostForm } from './features/posts/EditPostForm.jsx';
 import { UsersList } from './features/users/UsersList.jsx';
 import { UserPage } from './features/users/UserPage.jsx';
+import { CommentsList } from './features/comments/CommentsList.jsx';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route exact path="/editPost/:postId" component={EditPostForm} />
           <Route exact path="/users" component={UsersList} />
           <Route exact path="/users/:userId" component={UserPage} />
+          <Route exact path="/comments" component={CommentsList} />
           <Redirect to="/" />
         </Switch>
       </div>
