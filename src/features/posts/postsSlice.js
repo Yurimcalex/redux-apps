@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { nanoid, createAsyncThunk } from '@reduxjs/toolkit';
+import { nanoid, createAsyncThunk, createSelector } from '@reduxjs/toolkit';
 import { sub } from 'date-fns';
 
 const initialState = {
@@ -70,6 +70,13 @@ export const { postAdded, postUpdated, reactionAdded } = postsSlice.actions;
 export const selectAllPosts = state => state.posts.posts;
 export const selectPostById = (state, postId) =>
 	state.posts.posts.find(post => post.id == postId);
+export const selectPostsByUser = createSelector(
+	[
+		selectAllPosts,
+		(state, userId) => userId
+	],
+	(posts, useId) => posts.filter(post => post.userId == useId)
+);
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
   const response = await fetch('https://jsonplaceholder.typicode.com/posts');
