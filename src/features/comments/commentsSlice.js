@@ -4,14 +4,25 @@ import { selectAllPosts } from '../posts/postsSlice.js';
 const commentsSlice = createSlice({
 	name: 'comments',
 	initialState: [],
-	reducers: {},
+	reducers: {
+		allCommentsRead(state, action) {
+			state.forEach(entrie => {
+				entrie.read = true;
+			});
+		}
+	},
 	extraReducers(builder) {
 		builder.addCase(fetchComments.fulfilled, (state, action) => {
 			state.push(action.payload);
+			state.forEach(entrie => {
+				entrie.isNew = !entrie.read;
+			});
 			state.sort((a, b) => b.date.localeCompare(a.date));
 		});
 	}
 });
+
+export const { allCommentsRead } = commentsSlice.actions;
 
 export const selectAllComments = state => state.comments;
 
@@ -36,6 +47,8 @@ export const fetchComments = createAsyncThunk(
 			data,
 			postId,
 			date: new Date().toISOString(),
+			isNew: true,
+			read: false
 		};
 	}
 );
