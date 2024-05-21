@@ -1,20 +1,31 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, {useLayoutEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { formatDistanceToNow, parseISO } from 'date-fns';
+import classnames from 'classnames';
 import { selectAllPosts } from '../posts/postsSlice.js';
-import { selectAllComments } from './commentsSlice.js';
+import { selectAllComments, allCommentsRead } from './commentsSlice.js';
+
 
 export const CommentsList = () => {
+	const dispatch = useDispatch();
 	const comments = useSelector(selectAllComments);
 	const posts = useSelector(selectAllPosts);
+
+	useLayoutEffect(() => {
+		dispatch(allCommentsRead());
+	});
 
 	const renderedComments = comments.map(comment => {
 		const date = parseISO(comment.date);
 		const timeAgo = formatDistanceToNow(date);
 		const post = posts.find(post => post.id == comment.postId);
 
+		const commentsClassname = classnames('notification', {
+			new: comment.isNew
+		});
+
 		return (
-			<div key={comment.postId} className='notification'>
+			<div key={comment.postId} className={commentsClassname}>
 				<div>
 					<h3>{post.title}</h3><br/>
 					<em>{post.body}</em>
