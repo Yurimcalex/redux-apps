@@ -1,30 +1,34 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, createEntityAdapter } from '@reduxjs/toolkit';
 import { selectAllPosts } from '../posts/postsSlice.js';
+
+const commentsAdapter = createEntityAdapter({
+	 sortComparer: (a, b) => b.date.localeCompare(a.date)
+});
 
 const commentsSlice = createSlice({
 	name: 'comments',
-	initialState: [],
+	initialState: commentsAdapter.getInitialState(),
 	reducers: {
 		allCommentsRead(state, action) {
-			state.forEach(entrie => {
-				entrie.read = true;
-			});
+			Object.values(state.entities).forEach(entrie => {
+        entrie.read = true;
+      });
 		}
 	},
 	extraReducers(builder) {
 		builder.addCase(fetchComments.fulfilled, (state, action) => {
-			state.push(action.payload);
-			state.forEach(entrie => {
-				entrie.isNew = !entrie.read;
-			});
-			state.sort((a, b) => b.date.localeCompare(a.date));
+			commentsAdapter.upsertMany(state, action.payload)
+      Object.values(state.entities).forEach(entrie => {
+        entrie.isNew = !entrie.read
+      })
 		});
 	}
 });
 
 export const { allCommentsRead } = commentsSlice.actions;
 
-export const selectAllComments = state => state.comments;
+export const { selectAll: selectAllComments } =
+  commentsAdapter.getSelectors(state => state.comments)
 
 export const fetchComments = createAsyncThunk(
 	'comments/fetchComments',
@@ -43,13 +47,14 @@ export const fetchComments = createAsyncThunk(
 
 		const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`);
 		const data = await response.json();
-		return {
+		return [{
+			id: postId,
 			data,
 			postId,
 			date: new Date().toISOString(),
 			isNew: true,
 			read: false
-		};
+		}];
 	}
 );
 
